@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,15 +20,19 @@ namespace Notatnik2020
         private int currentChangesListElement = 0;
         private bool undoActionActive = false;
         private bool redoActionActive = false;
+        private SoundPlayer soundPlayer;
 
         public Form1()
         {
             InitializeComponent();
+            string mainPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string outputPath = Path.Combine(mainPath, "Sounds", "Windows_95_Startup-Microsoft-2077254053.wav");
+            soundPlayer = new SoundPlayer(outputPath);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            soundPlayer.Play();
         }
 
         private void otwórzctrlOToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,8 +54,7 @@ namespace Notatnik2020
                     mainTextAreaTB.Text = fileText;
                     statusBar.Text = "Wczytano " + Path.GetFileName(fileDialog.FileName);
                 }
-            }
-            
+            }           
         }
 
         private void zapiszJakoctrlSToolStripMenuItem_Click(object sender, EventArgs e)
@@ -88,7 +92,6 @@ namespace Notatnik2020
                 mainTextAreaTB.Text = changesList[currentChangesListElement];
                 mainTextAreaTB.Select(mainTextAreaTB.Text.Length, 0);
             }
-
         }
 
         private void wykonajPonownieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,11 +211,6 @@ namespace Notatnik2020
                 mainTextAreaTB.BackColor = colorDialog.Color;
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             this.mainTextAreaTB.Width = this.Width - 16;
@@ -256,6 +254,21 @@ namespace Notatnik2020
                     e.Cancel = true;
                     break;
             }
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            notifyIcon1.ShowBalloonTip(5000);
+        }
+
+        private void oAutorzeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zamknijToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

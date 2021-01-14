@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +50,13 @@
             this.mainTextAreaTB = new System.Windows.Forms.TextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusBar = new System.Windows.Forms.ToolStripStatusLabel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.oAutorzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zamknijToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,49 +119,49 @@
             // cofnijToolStripMenuItem
             // 
             this.cofnijToolStripMenuItem.Name = "cofnijToolStripMenuItem";
-            this.cofnijToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cofnijToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.cofnijToolStripMenuItem.Text = "Cofnij";
             this.cofnijToolStripMenuItem.Click += new System.EventHandler(this.cofnijToolStripMenuItem_Click);
             // 
             // wykonajPonownieToolStripMenuItem
             // 
             this.wykonajPonownieToolStripMenuItem.Name = "wykonajPonownieToolStripMenuItem";
-            this.wykonajPonownieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wykonajPonownieToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.wykonajPonownieToolStripMenuItem.Text = "Wykonaj ponownie";
             this.wykonajPonownieToolStripMenuItem.Click += new System.EventHandler(this.wykonajPonownieToolStripMenuItem_Click);
             // 
             // wytnijToolStripMenuItem
             // 
             this.wytnijToolStripMenuItem.Name = "wytnijToolStripMenuItem";
-            this.wytnijToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wytnijToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.wytnijToolStripMenuItem.Text = "Wytnij";
             this.wytnijToolStripMenuItem.Click += new System.EventHandler(this.wytnijToolStripMenuItem_Click);
             // 
             // kopiujToolStripMenuItem
             // 
             this.kopiujToolStripMenuItem.Name = "kopiujToolStripMenuItem";
-            this.kopiujToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kopiujToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.kopiujToolStripMenuItem.Text = "Kopiuj";
             this.kopiujToolStripMenuItem.Click += new System.EventHandler(this.kopiujToolStripMenuItem_Click);
             // 
             // wklejToolStripMenuItem
             // 
             this.wklejToolStripMenuItem.Name = "wklejToolStripMenuItem";
-            this.wklejToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wklejToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.wklejToolStripMenuItem.Text = "Wklej";
             this.wklejToolStripMenuItem.Click += new System.EventHandler(this.wklejToolStripMenuItem_Click);
             // 
             // usuńToolStripMenuItem
             // 
             this.usuńToolStripMenuItem.Name = "usuńToolStripMenuItem";
-            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.usuńToolStripMenuItem.Text = "Usuń";
             this.usuńToolStripMenuItem.Click += new System.EventHandler(this.usuńToolStripMenuItem_Click);
             // 
             // zaznaczWszystkoToolStripMenuItem
             // 
             this.zaznaczWszystkoToolStripMenuItem.Name = "zaznaczWszystkoToolStripMenuItem";
-            this.zaznaczWszystkoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zaznaczWszystkoToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.zaznaczWszystkoToolStripMenuItem.Text = "Zaznacz wszystko";
             this.zaznaczWszystkoToolStripMenuItem.Click += new System.EventHandler(this.zaznaczWszystkoToolStripMenuItem_Click);
             // 
@@ -172,14 +178,14 @@
             // czcionkaToolStripMenuItem
             // 
             this.czcionkaToolStripMenuItem.Name = "czcionkaToolStripMenuItem";
-            this.czcionkaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.czcionkaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.czcionkaToolStripMenuItem.Text = "Czcionka";
             this.czcionkaToolStripMenuItem.Click += new System.EventHandler(this.czcionkaToolStripMenuItem_Click);
             // 
             // tłoToolStripMenuItem
             // 
             this.tłoToolStripMenuItem.Name = "tłoToolStripMenuItem";
-            this.tłoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tłoToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.tłoToolStripMenuItem.Text = "Tło";
             this.tłoToolStripMenuItem.Click += new System.EventHandler(this.tłoToolStripMenuItem_Click);
             // 
@@ -188,7 +194,7 @@
             this.pasekStanuToolStripMenuItem.Checked = true;
             this.pasekStanuToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pasekStanuToolStripMenuItem.Name = "pasekStanuToolStripMenuItem";
-            this.pasekStanuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasekStanuToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.pasekStanuToolStripMenuItem.Text = "Pasek stanu";
             this.pasekStanuToolStripMenuItem.Click += new System.EventHandler(this.pasekStanuToolStripMenuItem_Click);
             // 
@@ -216,8 +222,41 @@
             // statusBar
             // 
             this.statusBar.Name = "statusBar";
+            this.statusBar.Text = "Brak wczytanego pliku";
             this.statusBar.Size = new System.Drawing.Size(0, 17);
-            this.statusBar.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon1.BalloonTipText = "Jednoosobowy zespół projektowy";
+            this.notifyIcon1.BalloonTipTitle = "Notatnik 2020";
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Notatnik 2020, Jednoosobowy zespół projektowy, Sebastian Knych.";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oAutorzeToolStripMenuItem,
+            this.zamknijToolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(126, 48);
+            // 
+            // oAutorzeToolStripMenuItem
+            // 
+            this.oAutorzeToolStripMenuItem.Name = "oAutorzeToolStripMenuItem";
+            this.oAutorzeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.oAutorzeToolStripMenuItem.Text = "O autorze";
+            this.oAutorzeToolStripMenuItem.Click += new System.EventHandler(this.oAutorzeToolStripMenuItem_Click);
+            // 
+            // zamknijToolStripMenuItem1
+            // 
+            this.zamknijToolStripMenuItem1.Name = "zamknijToolStripMenuItem1";
+            this.zamknijToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.zamknijToolStripMenuItem1.Text = "Zamknij";
+            this.zamknijToolStripMenuItem1.Click += new System.EventHandler(this.zamknijToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -231,6 +270,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notatnik 2020";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -239,6 +279,7 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,6 +307,10 @@
         private System.Windows.Forms.ToolStripMenuItem wykonajPonownieToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusBar;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem oAutorzeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zamknijToolStripMenuItem1;
     }
 }
 
