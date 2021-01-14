@@ -35,6 +35,9 @@
             this.otwórzctrlOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszJakoctrlSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ustawieniaStronyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drukujctrlPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.podglądWydrukuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cofnijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykonajPonownieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +57,12 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.oAutorzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zamknijToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -76,23 +85,31 @@
             this.plikToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.otwórzctrlOToolStripMenuItem,
             this.zapiszJakoctrlSToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.ustawieniaStronyToolStripMenuItem,
+            this.drukujctrlPToolStripMenuItem,
+            this.podglądWydrukuToolStripMenuItem,
+            this.toolStripSeparator2,
             this.zamknijToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
+            this.plikToolStripMenuItem.ShortcutKeyDisplayString = "ctrl+O";
             this.plikToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.plikToolStripMenuItem.Text = "Plik";
             // 
             // otwórzctrlOToolStripMenuItem
             // 
             this.otwórzctrlOToolStripMenuItem.Name = "otwórzctrlOToolStripMenuItem";
-            this.otwórzctrlOToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.otwórzctrlOToolStripMenuItem.Text = "Otwórz (ctrl+O)";
+            this.otwórzctrlOToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.otwórzctrlOToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.otwórzctrlOToolStripMenuItem.Text = "Otwórz";
             this.otwórzctrlOToolStripMenuItem.Click += new System.EventHandler(this.otwórzctrlOToolStripMenuItem_Click);
             // 
             // zapiszJakoctrlSToolStripMenuItem
             // 
             this.zapiszJakoctrlSToolStripMenuItem.Name = "zapiszJakoctrlSToolStripMenuItem";
-            this.zapiszJakoctrlSToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.zapiszJakoctrlSToolStripMenuItem.Text = "Zapisz jako... (ctrl+S)";
+            this.zapiszJakoctrlSToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.zapiszJakoctrlSToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.zapiszJakoctrlSToolStripMenuItem.Text = "Zapisz jako...";
             this.zapiszJakoctrlSToolStripMenuItem.Click += new System.EventHandler(this.zapiszJakoctrlSToolStripMenuItem_Click);
             // 
             // zamknijToolStripMenuItem
@@ -101,6 +118,28 @@
             this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
             this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
+            // 
+            // ustawieniaStronyToolStripMenuItem
+            // 
+            this.ustawieniaStronyToolStripMenuItem.Name = "ustawieniaStronyToolStripMenuItem";
+            this.ustawieniaStronyToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ustawieniaStronyToolStripMenuItem.Text = "Ustawienia strony";
+            this.ustawieniaStronyToolStripMenuItem.Click += new System.EventHandler(this.ustawieniaStronyToolStripMenuItem_Click);
+            // 
+            // drukujctrlPToolStripMenuItem
+            // 
+            this.drukujctrlPToolStripMenuItem.Name = "drukujctrlPToolStripMenuItem";
+            this.drukujctrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.drukujctrlPToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.drukujctrlPToolStripMenuItem.Text = "Drukuj";
+            this.drukujctrlPToolStripMenuItem.Click += new System.EventHandler(this.drukujctrlPToolStripMenuItem_Click);
+            // 
+            // podglądWydrukuToolStripMenuItem
+            // 
+            this.podglądWydrukuToolStripMenuItem.Name = "podglądWydrukuToolStripMenuItem";
+            this.podglądWydrukuToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.podglądWydrukuToolStripMenuItem.Text = "Podgląd wydruku";
+            this.podglądWydrukuToolStripMenuItem.Click += new System.EventHandler(this.podglądWydrukuToolStripMenuItem_Click);
             // 
             // edytujToolStripMenuItem
             // 
@@ -200,12 +239,13 @@
             // 
             // mainTextAreaTB
             // 
-            this.mainTextAreaTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainTextAreaTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mainTextAreaTB.Location = new System.Drawing.Point(0, 27);
             this.mainTextAreaTB.MinimumSize = new System.Drawing.Size(100, 60);
             this.mainTextAreaTB.Multiline = true;
             this.mainTextAreaTB.Name = "mainTextAreaTB";
-            this.mainTextAreaTB.Size = new System.Drawing.Size(784, 421);
+            this.mainTextAreaTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mainTextAreaTB.Size = new System.Drawing.Size(784, 398);
             this.mainTextAreaTB.TabIndex = 1;
             this.mainTextAreaTB.TextChanged += new System.EventHandler(this.mainTextAreaTB_TextChanged);
             // 
@@ -222,8 +262,8 @@
             // statusBar
             // 
             this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(125, 17);
             this.statusBar.Text = "Brak wczytanego pliku";
-            this.statusBar.Size = new System.Drawing.Size(0, 17);
             // 
             // notifyIcon1
             // 
@@ -257,6 +297,40 @@
             this.zamknijToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.zamknijToolStripMenuItem1.Text = "Zamknij";
             this.zamknijToolStripMenuItem1.Click += new System.EventHandler(this.zamknijToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.Document = this.printDocument1;
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // pageSetupDialog1
+            // 
+            this.pageSetupDialog1.Document = this.printDocument1;
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // Form1
             // 
@@ -311,6 +385,15 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem oAutorzeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zamknijToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ustawieniaStronyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drukujctrlPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem podglądWydrukuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }
 

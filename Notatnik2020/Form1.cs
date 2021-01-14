@@ -21,6 +21,7 @@ namespace Notatnik2020
         private bool undoActionActive = false;
         private bool redoActionActive = false;
         private SoundPlayer soundPlayer;
+        private StringReader stringReader;
 
         public Form1()
         {
@@ -214,7 +215,7 @@ namespace Notatnik2020
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             this.mainTextAreaTB.Width = this.Width - 16;
-            this.mainTextAreaTB.Height = this.Height - 68;
+            this.mainTextAreaTB.Height = this.Height - 89;
         }
 
         private void pasekStanuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,11 +224,13 @@ namespace Notatnik2020
             {
                 pasekStanuToolStripMenuItem.Checked = false;
                 statusStrip.Visible = false;
+                this.mainTextAreaTB.Height = this.Height - 68;
             }
             else
             {
                 pasekStanuToolStripMenuItem.Checked = true;
                 statusStrip.Visible = true;
+                this.mainTextAreaTB.Height = this.Height - 89;
             }
 
         }
@@ -263,12 +266,86 @@ namespace Notatnik2020
 
         private void oAutorzeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Autor: Sebastian Knych, Informatyka II rok II stopnia");
         }
 
         private void zamknijToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+        }
 
+        private void drukujctrlPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+                printDocument1.Print();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            //Font czcionkaTekstu = mainTextAreaTB.Font;
+            //int wysokoscWierszaTekstu = (int)czcionkaTekstu.GetHeight(e.Graphics);
+            //int iloscLiniiTekstuNaStrone = e.MarginBounds.Height / wysokoscWierszaTekstu;
+
+            //if (stringReader == null)
+            //    stringReader = new StringReader(mainTextAreaTB.Text);
+
+            //e.HasMorePages = true;
+
+            //for (int i = 0; i < iloscLiniiTekstuNaStrone; i++)
+            //{
+            //    string wiersz = stringReader.ReadLine();
+            //    if (wiersz == null)
+            //    {
+            //        e.HasMorePages = false;
+            //        stringReader = null;
+            //        break;
+            //    }
+            //    e.Graphics.DrawString(wiersz, czcionkaTekstu, Brushes.Black, 
+            //        e.MarginBounds.Left, e.MarginBounds.Top + i * wysokoscWierszaTekstu);
+            //}
+
+            bool stop = false;
+            int i = 0;
+            Font textboxFont = mainTextAreaTB.Font;
+            int heightOfTextLine = (int)textboxFont.GetHeight(e.Graphics);
+            int numOfLinesPerPage = e.MarginBounds.Height / heightOfTextLine;
+
+            if (stringReader is null)
+                stringReader = new StringReader(mainTextAreaTB.Text);
+
+            e.HasMorePages = true;
+
+            do
+            {
+                i++;
+                string singleLine = stringReader.ReadLine();
+
+                if (numOfLinesPerPage - 1 == i)
+                {
+                    stop = true;
+                }
+                else if (singleLine is null)
+                {
+                    e.HasMorePages = false;
+                    stringReader = null;
+                    stop = true;
+                }
+                else
+                {
+                    e.Graphics.DrawString(singleLine, textboxFont, Brushes.Black,
+                        e.MarginBounds.Left, e.MarginBounds.Top + i * heightOfTextLine);
+                }
+            } while (!stop);
+        }
+
+        private void ustawieniaStronyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pageSetupDialog1.ShowDialog();
+        }
+
+        private void podglądWydrukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
         }
     }
 }
