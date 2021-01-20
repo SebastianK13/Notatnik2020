@@ -34,10 +34,12 @@
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otwórzctrlOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszJakoctrlSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ustawieniaStronyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drukujctrlPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.podglądWydrukuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cofnijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykonajPonownieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,8 +59,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.oAutorzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zamknijToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
@@ -112,12 +112,10 @@
             this.zapiszJakoctrlSToolStripMenuItem.Text = "Zapisz jako...";
             this.zapiszJakoctrlSToolStripMenuItem.Click += new System.EventHandler(this.zapiszJakoctrlSToolStripMenuItem_Click);
             // 
-            // zamknijToolStripMenuItem
+            // toolStripSeparator1
             // 
-            this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
-            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.zamknijToolStripMenuItem.Text = "Zamknij";
-            this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
             // 
             // ustawieniaStronyToolStripMenuItem
             // 
@@ -140,6 +138,18 @@
             this.podglądWydrukuToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.podglądWydrukuToolStripMenuItem.Text = "Podgląd wydruku";
             this.podglądWydrukuToolStripMenuItem.Click += new System.EventHandler(this.podglądWydrukuToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // zamknijToolStripMenuItem
+            // 
+            this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.zamknijToolStripMenuItem.Text = "Zamknij";
+            this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
             // 
             // edytujToolStripMenuItem
             // 
@@ -239,7 +249,7 @@
             // 
             // mainTextAreaTB
             // 
-            this.mainTextAreaTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mainTextAreaTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mainTextAreaTB.Location = new System.Drawing.Point(0, 27);
             this.mainTextAreaTB.MinimumSize = new System.Drawing.Size(100, 60);
             this.mainTextAreaTB.Multiline = true;
@@ -297,16 +307,6 @@
             this.zamknijToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.zamknijToolStripMenuItem1.Text = "Zamknij";
             this.zamknijToolStripMenuItem1.Click += new System.EventHandler(this.zamknijToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
             // 
             // printDocument1
             // 

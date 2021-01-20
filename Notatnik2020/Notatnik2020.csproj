@@ -123,5 +123,11 @@
     <Content Include="notatnikIcon.ico" />
     <Content Include="Sounds\Windows_95_Startup-Microsoft-2077254053.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UsersOperations\UsersOperations.csproj">
+      <Project>{f15fbc0d-be14-4567-83f9-60dd02b0fd51}</Project>
+      <Name>UsersOperations</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

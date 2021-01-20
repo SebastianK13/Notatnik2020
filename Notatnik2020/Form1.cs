@@ -9,14 +9,15 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UsersOperations.IOMethods;
 
 namespace Notatnik2020
 {
     public partial class Form1 : Form
     {
+        private UsersMethods usersMethods;
         private string fileText = string.Empty;
-        private Stream fileStreamSave;
-        private List<string> changesList = new List<string> {""};
+        private List<string> changesList = new List<string> { "" };
         private int currentChangesListElement = 0;
         private bool undoActionActive = false;
         private bool redoActionActive = false;
@@ -26,6 +27,7 @@ namespace Notatnik2020
         public Form1()
         {
             InitializeComponent();
+            usersMethods = new UsersMethods();
             string mainPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string outputPath = Path.Combine(mainPath, "Sounds", "Windows_95_Startup-Microsoft-2077254053.wav");
             soundPlayer = new SoundPlayer(outputPath);
@@ -38,45 +40,15 @@ namespace Notatnik2020
 
         private void otwórzctrlOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog fileDialog = new OpenFileDialog())
-            {
-                fileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                fileDialog.Filter = "text file (*.txt)|*.txt";
-
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Stream fileStream = fileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        fileText = reader.ReadToEnd();
-                    }
-
-                    mainTextAreaTB.Text = fileText;
-                    statusBar.Text = "Wczytano " + Path.GetFileName(fileDialog.FileName);
-                }
-            }           
+            usersMethods.WczytajPlikTekstowy();
+            mainTextAreaTB.Text = usersMethods.fileText;
+            statusBar.Text = "Wczytano " + usersMethods.fileName;
         }
 
         private void zapiszJakoctrlSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-            fileDialog.Filter = "text file (*.txt)|*.txt";
-
-            if(fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                if((fileStreamSave = fileDialog.OpenFile()) != null)
-                {
-                    using (StreamWriter writer = new StreamWriter(fileStreamSave))
-                    {
-                        writer.Write(mainTextAreaTB.Text);
-                    }
-                    
-                    fileStreamSave.Close();
-                    statusBar.Text = "Zapisano do " + Path.GetFileName(fileDialog.FileName);
-                }
-            }
+            usersMethods.ZapiszPlikTekstowy(mainTextAreaTB.Text);
+            statusBar.Text = "Zapisano do " + usersMethods.savedFileName;
         }
 
         private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,7 +59,7 @@ namespace Notatnik2020
         private void cofnijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             undoActionActive = true;
-            if(changesList.Count()-1 >= currentChangesListElement && currentChangesListElement > 0)
+            if (changesList.Count() - 1 >= currentChangesListElement && currentChangesListElement > 0)
             {
                 currentChangesListElement--;
                 mainTextAreaTB.Text = changesList[currentChangesListElement];
@@ -98,17 +70,17 @@ namespace Notatnik2020
         private void wykonajPonownieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             redoActionActive = true;
-            if (currentChangesListElement < changesList.Count()-1)
+            if (currentChangesListElement < changesList.Count() - 1)
             {
                 currentChangesListElement++;
                 mainTextAreaTB.Text = changesList[currentChangesListElement];
-                mainTextAreaTB.Select(mainTextAreaTB.Text.Length, 0);                
+                mainTextAreaTB.Select(mainTextAreaTB.Text.Length, 0);
             }
         }
 
         private void mainTextAreaTB_TextChanged(object sender, EventArgs e)
         {
-            if(!undoActionActive && !redoActionActive)
+            if (!undoActionActive && !redoActionActive)
             {
                 bool blocked = false;
                 if (currentChangesListElement <= changesList.Count() - 1)
@@ -116,8 +88,8 @@ namespace Notatnik2020
                     int lastIndex = changesList.Count() - (currentChangesListElement + 1);
 
                     if (changesList.Count() > 1)
-                    {                       
-                        changesList.RemoveRange(currentChangesListElement+1, lastIndex);
+                    {
+                        changesList.RemoveRange(currentChangesListElement + 1, lastIndex);
                         AddNewElementToHistory();
                         currentChangesListElement = changesList.Count() - 1;
                         blocked = true;
@@ -125,7 +97,7 @@ namespace Notatnik2020
 
                 }
 
-                if(!blocked)
+                if (!blocked)
                     AddNewElementToHistory();
             }
             else
@@ -142,11 +114,11 @@ namespace Notatnik2020
         }
         private void CheckNumberOfHistoryElements()
         {
-            if(changesList.Count() > 30)
+            if (changesList.Count() > 30)
             {
                 changesList.RemoveAt(0);
 
-                if(currentChangesListElement > 0)
+                if (currentChangesListElement > 0)
                     currentChangesListElement--;
             }
         }
@@ -154,7 +126,7 @@ namespace Notatnik2020
         private void wytnijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (mainTextAreaTB.SelectedText != string.Empty)
-            { 
+            {
                 Clipboard.SetText(mainTextAreaTB.SelectedText);
                 mainTextAreaTB.SelectedText = "";
             }
@@ -239,8 +211,8 @@ namespace Notatnik2020
         {
             DialogResult result = MessageBox.Show(
                 "Czy zapisać zmiany przed zamknięciem programu?",
-                this.Text, MessageBoxButtons.YesNoCancel, 
-                MessageBoxIcon.Question, 
+                this.Text, MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
 
             switch (result)
@@ -253,7 +225,7 @@ namespace Notatnik2020
                 case DialogResult.Cancel:
                     e.Cancel = true;
                     break;
-                default: 
+                default:
                     e.Cancel = true;
                     break;
             }
@@ -282,28 +254,6 @@ namespace Notatnik2020
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            //Font czcionkaTekstu = mainTextAreaTB.Font;
-            //int wysokoscWierszaTekstu = (int)czcionkaTekstu.GetHeight(e.Graphics);
-            //int iloscLiniiTekstuNaStrone = e.MarginBounds.Height / wysokoscWierszaTekstu;
-
-            //if (stringReader == null)
-            //    stringReader = new StringReader(mainTextAreaTB.Text);
-
-            //e.HasMorePages = true;
-
-            //for (int i = 0; i < iloscLiniiTekstuNaStrone; i++)
-            //{
-            //    string wiersz = stringReader.ReadLine();
-            //    if (wiersz == null)
-            //    {
-            //        e.HasMorePages = false;
-            //        stringReader = null;
-            //        break;
-            //    }
-            //    e.Graphics.DrawString(wiersz, czcionkaTekstu, Brushes.Black, 
-            //        e.MarginBounds.Left, e.MarginBounds.Top + i * wysokoscWierszaTekstu);
-            //}
-
             bool stop = false;
             int i = 0;
             Font textboxFont = mainTextAreaTB.Font;
